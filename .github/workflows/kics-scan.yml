@@ -1,8 +1,0 @@
-- name: KICS Github Action
-  uses: Checkmarx/kics-github-action@v1.2
-   with:
-   path: kics-security-scan
-  # comma separated list of which severities returns exit code !=0
-     fail_on: # optional
-     output_formats: json
-     output_path: kics-security-scan/reports
