@@ -1,6 +1,8 @@
 name: scan with KICS and upload SARIF
 
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
 
