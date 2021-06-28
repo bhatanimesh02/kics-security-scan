@@ -1,23 +1,35 @@
-name: KICS
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+name: scan with KICS and upload JSON
 
-  workflow_dispatch:
+on:
+  pull_request:
+    branches: [master]
 
 jobs:
-  build:
+  kics-job:
     runs-on: ubuntu-latest
+    name: kics-action
     steps:
-    - uses: actions/checkout@v2
-    - name: run kics Scan
-      uses: checkmarx/kics-action@v1.2
-      with:
-        path: 'kics-secutiy-scan'
-        fail_on: high,medium
-        output_path: 'results.json'
-    - name: display kics results
-      run: |
-        cat results.json
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Mkdir results-dir
+        # make sure results dir is created
+        run: mkdir -p results-dir
+      - name: Run KICS Scan with JSON result
+        uses: checkmarx/kics-action@v1.2
+        with:
+          path: 'kics-security-scan'
+          # when provided with a directory on output_path
+          # it will generate the specified reports file named 'results.{extension}'
+          # in this example it will generate:
+          # - results-dir/results.json
+          # - results-dir/results.sarif
+          output_path: results-dir
+          platform_type: terraform
+          output_formats: 'json'
+      - name: Show results
+        run: |
+          cat results-dir/results.json
+      - name: Upload JSON file
+        uses: github/codeql-action/upload-json@v1
+        with:
+          sarif_file: results-dir/results.json
