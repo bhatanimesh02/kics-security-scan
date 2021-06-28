@@ -17,9 +17,8 @@ jobs:
         uses: checkmarx/kics-action@v1.2
         with:
           path: './'
-          output_path: results-dir
-          platform_type: terraform
-          output_formats: 'json,sarif'
+          output_path: './'
+          output_formats: 'json,html'
       - name: Show results
         run: |
           cat results.json
