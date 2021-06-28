@@ -14,10 +14,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Run KICS Scan
-        uses: checkmarx/kics-action@v1.2
+        uses: checkmarx/kics-action@latest
         with:
           path: './'
-          fail_on: false
+          ignore_on_exit: results
           output_path: './'
           output_formats: 'json,html'
       - name: Show results
