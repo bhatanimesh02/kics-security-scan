@@ -1,4 +1,4 @@
-name: scan with KICS and upload SARIF
+name: scan with KICS
 
 on:
   push:
