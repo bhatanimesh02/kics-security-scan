@@ -17,7 +17,7 @@ jobs:
       - name: Run KICS Scan with JSON result
         uses: checkmarx/kics-action@v1.2
         with:
-          path: 'kics-security-scan'
+          path: '../../'
           # when provided with a directory on output_path
           # it will generate the specified reports file named 'results.{extension}'
           # in this example it will generate:
