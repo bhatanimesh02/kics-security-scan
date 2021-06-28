@@ -17,6 +17,7 @@ jobs:
         uses: checkmarx/kics-action@v1.2
         with:
           path: './'
+          fail_on: false
           output_path: './'
           output_formats: 'json,html'
       - name: Show results
