@@ -1,0 +1,23 @@
+name: KICS
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: run kics Scan
+      uses: checkmarx/kics-action@v1.2
+      with:
+        path: 'kics-secutiy-scan'
+        fail_on: high,medium
+        output_path: 'results.json'
+    - name: display kics results
+      run: |
+        cat results.json
